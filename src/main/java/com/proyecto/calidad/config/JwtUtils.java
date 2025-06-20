@@ -1,6 +1,6 @@
 package com.proyecto.calidad.config;
 
-
+/*
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -55,3 +55,4 @@ public class JwtUtils {
     }
 
 }
+*/
