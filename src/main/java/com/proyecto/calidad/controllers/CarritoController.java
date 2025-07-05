@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,10 +77,13 @@ public class CarritoController {
             return ResponseEntity.badRequest().body(response);
         }
     }
-    
 
     @GetMapping("/misCompras")
     public ResponseEntity<?> obtenerCompras(Authentication authentication) {
+        if (authentication == null || !(authentication.getPrincipal() instanceof Usuario)) {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+
         Usuario usuario = (Usuario) authentication.getPrincipal();
         return ResponseEntity.ok(carritoService.obtenerComprasConfirmadas(usuario));
     }
