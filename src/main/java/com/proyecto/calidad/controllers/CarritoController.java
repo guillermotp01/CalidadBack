@@ -4,12 +4,10 @@ import com.proyecto.calidad.models.Carrito;
 import com.proyecto.calidad.models.Usuario;
 import com.proyecto.calidad.services.CarritoService;
 import com.proyecto.calidad.services.DetalleCarritoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

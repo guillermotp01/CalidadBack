@@ -1,7 +1,6 @@
 package com.proyecto.calidad.controllers;
 
 import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.proyecto.calidad.config.JwtUtils;
 import com.proyecto.calidad.models.JwtRequest;
 import com.proyecto.calidad.models.JwtResponse;

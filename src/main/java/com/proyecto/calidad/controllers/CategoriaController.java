@@ -1,10 +1,8 @@
 package com.proyecto.calidad.controllers;
 
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.proyecto.calidad.models.Categoria;
 import com.proyecto.calidad.services.CategoriaService;
 
