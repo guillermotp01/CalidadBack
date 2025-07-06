@@ -10,6 +10,8 @@ import com.proyecto.calidad.models.Usuario;
 import com.proyecto.calidad.repositories.CarritoRepository;
 import com.proyecto.calidad.repositories.DetalleCarritoRepository;
 import com.proyecto.calidad.repositories.ProductoRepository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -70,6 +72,27 @@ public class CarritoService {
         return carritoRepository.findAllByUsuarioAndEstado(usuario, "Confirmado");
     }
 
+//    public Carrito confirmarCarrito(Usuario usuario) {
+//        Optional<Carrito> carritoOpt = carritoRepository.findByUsuarioAndEstado(usuario, "Pendiente");
+//
+//        if (!carritoOpt.isPresent() || carritoOpt.get().getDetallesCarrito().isEmpty()) {
+//            throw new IllegalArgumentException("Carrito vacío");
+//        }
+//
+//        Carrito carrito = carritoOpt.get();
+//        carrito.setEstado("Confirmado");
+//        carrito.actualizarTotales();
+//
+//        for (DetalleCarrito detalle : carrito.getDetallesCarrito()) {
+//            Producto producto = detalle.getProducto();
+//            int cantidad = detalle.getCantidad();
+//            producto.actualizarStock(cantidad);
+//            productoRepository.save(producto);
+//        }
+//
+//        return carritoRepository.save(carrito);
+//    }
+    @Transactional
     public Carrito confirmarCarrito(Usuario usuario) {
         Optional<Carrito> carritoOpt = carritoRepository.findByUsuarioAndEstado(usuario, "Pendiente");
 
@@ -83,13 +106,26 @@ public class CarritoService {
 
         for (DetalleCarrito detalle : carrito.getDetallesCarrito()) {
             Producto producto = detalle.getProducto();
-            int cantidad = detalle.getCantidad();
-            producto.actualizarStock(cantidad); 
-            productoRepository.save(producto); 
+            producto.actualizarStock(detalle.getCantidad());
+            productoRepository.save(producto);
         }
 
-        return carritoRepository.save(carrito);
+        carritoRepository.save(carrito); // Guarda como "Confirmado"
+
+        // ✅ Crea un nuevo carrito vacío para futuras compras
+        Carrito nuevoCarrito = new Carrito();
+        nuevoCarrito.setUsuario(usuario);
+        nuevoCarrito.setEstado("Pendiente");
+        nuevoCarrito.setPrecioTotal(0.0);
+        nuevoCarrito.setCantidadTotal(0);
+        nuevoCarrito.setSubtotal(0.0);
+        nuevoCarrito.setPrecioDelivery(0.0);
+
+        carritoRepository.save(nuevoCarrito);
+
+        return carrito;
     }
+
 
     public Carrito obtenerCarritoPorId(Integer id) {
         return carritoRepository.findById(id)
