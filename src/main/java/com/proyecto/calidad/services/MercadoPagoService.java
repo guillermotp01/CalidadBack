@@ -51,7 +51,7 @@ public class MercadoPagoService {
 
             // Configurar las URLs de retorno
             PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                    .success("https://localhost:4200/success")  // cambiar la url pero no puede ser local
+                    .success("https://ecommerce-pi-five.vercel.app/misCompras/success")  // cambiar la url pero no puede ser local
                     .pending("https://f486-38-253-146-176.ngrok-free.app/mis-viajes/pending")
                     .failure("https://f486-38-253-146-176.ngrok-free.app/mis-viajes/failure")
                     .build();
