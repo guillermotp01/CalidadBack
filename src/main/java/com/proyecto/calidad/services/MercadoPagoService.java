@@ -51,9 +51,9 @@ public class MercadoPagoService {
 
             // Configurar las URLs de retorno
             PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                    .success("https://ecommerce-pi-five.vercel.app/misCompras/success")  // cambiar la url pero no puede ser local
-                    .pending("https://ecommerce-pi-five.vercel.app/misCompras/pending")
-                    .failure("https://ecommerce-pi-five.vercel.app/misCompras/failure")
+                    .success("https://ecommerce-pi-five.vercel.app/carrito/success")  // cambiar la url pero no puede ser local
+                    .pending("https://ecommerce-pi-five.vercel.app/carrito/pending")
+                    .failure("https://ecommerce-pi-five.vercel.app/carrito/failure")
                     .build();
 
             // Crear la preferencia
